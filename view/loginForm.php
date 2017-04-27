@@ -1,6 +1,16 @@
 <?php
 if(!isset($_SESSION))
     session_start();
+/*
+function writeHistory() {
+    if(file_exists("messenger/log.html") && filesize("messenger/log.html") > 0) {
+        $handle = fopen("messenger/log.html", "r");
+        $contents = fread($handle, filesize("messenger/log.html"));
+        fclose($handle);
+        echo $contents;
+    }
+}
+*/
 
 function loginForm() {
     echo'
@@ -24,11 +34,20 @@ function chatBox() {
             <div style="clear:both"></div>
         </div>         
 
-        <div id="chatbox"></div>
+        <div id="chatbox">';
+    
+    if(file_exists("messenger/log.html") && filesize("messenger/log.html") > 0) {
+        $handle = fopen("messenger/log.html", "r");
+        $contents = fread($handle, filesize("messenger/log.html"));
+        fclose($handle);
+        echo $contents;
+    }
+    
+    echo'</div>
 
-        <form name="message" action="#">
-            <input id="usermsg" class="form-control" name="usermsg" type="text" size="63" />
-            <input id="submitmsg" class="btn btn-block btn-primary" name="submitmsg" type="submit" value="Send" />
+        <form id="chatForm" name="message" action="#">
+            <input id="userMsg" class="userInput form-control" name="userMsg" type="text" size="63" placeholder="Type your text here" autofocus/>
+            <input id="submitMsg" class="btn btn-block btn-primary" name="submitMsg" type="submit" value="Send" />
         </form>
     </div>
     '; 
@@ -42,6 +61,10 @@ if(isset($_POST['enter'])) {
         chatBox();
     }
 }else {
-    loginForm();
+    if(!$_SESSION)
+        loginForm();
+    else {
+        chatBox();
+    }
 }
 ?>
