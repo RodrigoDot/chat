@@ -4,4 +4,4 @@ The intent of this project is build an real-time chat, using PHP and AJAX withou
 
 To reach this objective I'm using JQuery and Bootstrap to turn easy doing same interactions.
 
-The chat itself is builded in two modules, the login area and the chatlog itself.
+The chat itself is built in two modules, the login area and the chatlog itself.
