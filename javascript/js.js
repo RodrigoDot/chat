@@ -12,16 +12,13 @@ $(function() {
     }
 
     function submitMsg() {
-        console.log("send ON");
         var clientMsg = $("#userMsg").val();
         $.post("messenger/post.php", {text: clientMsg});
         $("#userMsg").val("");
-        console.log(clientMsg);
         return false;
     }
 
     function loadLog(){		
-        console.log("funcao Load ON");
         var newScrollHeight = $("#chatbox").prop("scrollHeight");
         $("#chatbox").animate({ scrollTop: newScrollHeight }, 'normal');
         $.ajax({
@@ -34,8 +31,7 @@ $(function() {
     }
     
     function inputMsgAutoFocus() {
-        console.log("funcao autoFocus ON");
-        $("#userMsg").prop("autofocus", "true");
+        $("#userMsg").focus();
     }
     
     function exitDisableButton() {
