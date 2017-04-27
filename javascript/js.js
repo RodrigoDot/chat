@@ -22,17 +22,20 @@ $(function() {
 
     function loadLog(){		
         console.log("funcao Load ON");
+        var newScrollHeight = $("#chatbox").prop("scrollHeight");
+        $("#chatbox").animate({ scrollTop: newScrollHeight }, 'normal');
         $.ajax({
-          url: "messenger/log.html",
-          cache: false,
-          success: function(html){		
-            $("#chatbox").html(html); //Insert chat log into the #chatbox div				
+            url: "messenger/log.html",
+            cache: false,
+            success: function(html){		
+                $("#chatbox").html(html); //Insert chat log into the #chatbox div	
             },
         });
     }
-
-    function teste() {
-        window.location = "messenger/teste.php"; 
+    
+    function inputMsgAutoFocus() {
+        console.log("funcao autoFocus ON");
+        $("#userMsg").prop("autofocus", "true");
     }
     
     function exitDisableButton() {
@@ -58,6 +61,8 @@ $(function() {
     $("#exit").click(displayWarming);
     $("#submitMsg").click(submitMsg);
     $("#submitMsg").click(loadLog);
+    $("#submitMsg").click(inputMsgAutoFocus);
+    
 });
 
 
