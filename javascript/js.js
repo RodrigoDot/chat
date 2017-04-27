@@ -10,23 +10,6 @@ $(function() {
         exitDisableButton();
         $("body").append($exitBox);
     }
-    
-    /*
-    function submitMsg() {
-        $("#chatForm").submit(function() {
-            var dados = $(this).serialize();
-            $.ajax({
-                type: "POST",
-                url: "../messenger/log.php",
-                data: dados,
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-            return false;
-        });
-    }
-    */
 
     function submitMsg() {
         console.log("send ON");
@@ -37,25 +20,17 @@ $(function() {
         return false;
     }
 
-    function loadLog() {
-        console.log("load ON");
-        var oldScrollHeight = $("#chatbox").attr("scrollHeight") - 20; //Scroll height before the request
+    function loadLog(){		
+        console.log("funcao Load ON");
         $.ajax({
-            url: "messenger/log.html",
-            cache: false,
-            seccess: function(html) {
-                $("#chatbox").html(html);
-                console.log("sdffsdfd");
-                //auto scroll
-                var newScrollHeight = $("#chatbox").attr("scrollHeight") - 20; //Scroll height after the request
-				        if(newScrollHeight > oldScrollHeight){
-					       $("#chatbox").animate({ scrollTop: newScrollHeight }, 'normal'); //Autoscroll to bottom of div
-				        }		
+          url: "messenger/log.html",
+          cache: false,
+          success: function(html){		
+            $("#chatbox").html(html); //Insert chat log into the #chatbox div				
             },
         });
     }
- 
-    
+
     function teste() {
         window.location = "messenger/teste.php"; 
     }
@@ -79,9 +54,10 @@ $(function() {
     
     //CHAMADAS DE EVENTOS
     
-    setInterval (loadLog, 2500);
+    setInterval (loadLog, 500);
     $("#exit").click(displayWarming);
     $("#submitMsg").click(submitMsg);
+    $("#submitMsg").click(loadLog);
 });
 
 
