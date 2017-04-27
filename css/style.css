@@ -27,3 +27,15 @@
     border:1px solid #ACD8F0;
     overflow:auto; 
 }
+
+.alert-danger {
+    text-align: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirmButtons {
+    margin: 0 10px 0 10px;
+}
+

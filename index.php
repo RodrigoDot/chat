@@ -8,7 +8,8 @@
         <title>Chat</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <script src="lib/bootstrap/bootstrap.min.css"></script>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.min.css" />
+        <script src="lib/JQuery/jquery-3.1.1.min.js"></script>
     </head>
 
     <body>
@@ -16,4 +17,5 @@
             include("view/loginForm.php");
         ?>
     </body>
+    <script src="javascript/js.js"></script>
 </html>
