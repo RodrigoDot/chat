@@ -12,7 +12,6 @@ $(function() {
     }
 
     function submitMsg() {
-        autoScroll();
         var clientMsg = $("#userMsg").val();
         if(!clientMsg) {
             return false;
@@ -22,17 +21,16 @@ $(function() {
             $("#userMsg").focus();
             return false;
         }
-        autoScroll();
     }
 
     function loadLog(){	
-        autoScroll();
+        var oldScrollHeight = $("#chatbox").prop("scrollHeight");
         $.ajax({
             url: "messenger/log.html",
             cache: false,
             success: function(html){		
-                $("#chatbox").html(html); //Insert chat log into the #chatbox div
-                autoScroll();
+                $("#chatbox").html(html); 
+                autoScroll(oldScrollHeight);
             },
         });
     }
@@ -45,9 +43,11 @@ $(function() {
         $("#exit").show();
     }
     
-    function autoScroll() {
+    function autoScroll(scrollValue) {
         var newScrollHeight = $("#chatbox").prop("scrollHeight");
-        $("#chatbox").animate({ scrollTop: newScrollHeight }, 'fast');
+        if(scrollValue < newScrollHeight) {
+            $("#chatbox").animate({ scrollTop: newScrollHeight }, 'fast');   
+        }
     }
     
     $(document).on('click', '.cancel', function(){ 
