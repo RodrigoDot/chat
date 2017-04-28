@@ -12,34 +12,42 @@ $(function() {
     }
 
     function submitMsg() {
+        autoScroll();
         var clientMsg = $("#userMsg").val();
-        $.post("messenger/post.php", {text: clientMsg});
-        $("#userMsg").val("");
-        return false;
+        if(!clientMsg) {
+            return false;
+        }else {
+            $.post("messenger/post.php", {text: clientMsg});
+            $("#userMsg").val("");
+            $("#userMsg").focus();
+            return false;
+        }
+        autoScroll();
     }
 
-    function loadLog(){		
-        var newScrollHeight = $("#chatbox").prop("scrollHeight");
-        $("#chatbox").animate({ scrollTop: newScrollHeight }, 'normal');
+    function loadLog(){	
+        autoScroll();
         $.ajax({
             url: "messenger/log.html",
             cache: false,
             success: function(html){		
-                $("#chatbox").html(html); //Insert chat log into the #chatbox div	
+                $("#chatbox").html(html); //Insert chat log into the #chatbox div
+                autoScroll();
             },
         });
     }
-    
-    function inputMsgAutoFocus() {
-        $("#userMsg").focus();
-    }
-    
+  
     function exitDisableButton() {
         $("#exit").hide();
     }
     
     function exitEnableButton() {
         $("#exit").show();
+    }
+    
+    function autoScroll() {
+        var newScrollHeight = $("#chatbox").prop("scrollHeight");
+        $("#chatbox").animate({ scrollTop: newScrollHeight }, 'fast');
     }
     
     $(document).on('click', '.cancel', function(){ 
@@ -57,8 +65,6 @@ $(function() {
     $("#exit").click(displayWarming);
     $("#submitMsg").click(submitMsg);
     $("#submitMsg").click(loadLog);
-    $("#submitMsg").click(inputMsgAutoFocus);
-    
 });
 
 
